@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trung tâm ngoại ngữ Aplus - Điểm danh</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    
+    body { 
+      background-color: #f0f2f5; 
+      margin: 0; 
+      padding: 0; 
+      display: flex; 
+      justify-content: center; 
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Banner màu xanh đặc trưng cũ */
+    .header-banner {
+      background-color: #03522a;
+      color: white;
+      text-align: center;
+      padding: 30px 20px 60px 20px;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+    .header-banner .sub-title {
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      opacity: 0.9;
+      font-weight: 600;
+    }
+    .header-banner .main-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* Form Card chèn đè lên Banner */
+    .form-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 35px 40px;
+      margin: -35px 20px 40px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 10;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    /* Hàng 2 cột */
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: #333333;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #dcdfe6;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #333;
+      background-color: #fff;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #03522a;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Ô nhập tên học sinh vắng (Mặc định ẩn) */
+    #absentNamesGroup {
+      display: none;
+      background-color: #f9fbf9;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px dashed #a2d2b5;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #03522a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #023e1f;
+    }
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 600px) {
+      .form-card { padding: 20px; margin-left: 10px; margin-right: 10px; }
+      .form-row { flex-direction: column; gap: 0; }
+      .header-banner .main-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- Header chuẩn mẫu cũ -->
+    <div class="header-banner">
+      <div class="sub-title">CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN GIÁO DỤC - DU LỊCH - DU HỌC APLUS</div>
+      <h1 class="main-title">Trung tâm ngoại ngữ Aplus</h1>
+    </div>
+
+    <!-- Khung nội dung Form -->
+    <div class="form-card">
+      <form id="reportForm" onsubmit="handleFormSubmit(event)">
+        
+        <div class="form-group">
+          <label for="reportDate">Ngày báo cáo</label>
+          <input type="date" id="reportDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reporter">Giáo viên</label>
+          <select id="reporter" required>
+            <option value="">-- Chọn Giáo viên --</option>
+            <option value="Phan Ngọc Huy">Phan Ngọc Huy</option>
+          <option value="Phạm Ngọc Hải">Phạm Ngọc Hải</option>
+          <option value="Lê Thị Thùy Trang">Lê Thị Thùy Trang</option>
+          <option value="Lê Trung Nguyên">Lê Trung Nguyên</option>
+          <option value="Trịnh Hữu Phát">Trịnh Hữu Phát</option>
+          <option value="Hồ Mai Phương">Hồ Mai Phương</option>
+          <option value="Phạm Thị Trà My">Phạm Thị Trà My</option>
+          <option value="Bùi Ngọc Thiên Anh">Bùi Ngọc Thiên Anh</option>
+          <option value="Vũ Khánh Vân">Vũ Khánh Vân</option>
+          <option value="Julie Ann">Julie Ann</option>
+          <option value="Nguyễn Đức Anh">Nguyễn Đức Anh</option>
+          <option value="Nhân sự A">Nhân sự A</option>
+          <option value="Nhân sự B">Nhân sự B</option>
+            <!-- Mr Huy có thể thêm/sửa tên giáo viên ở đây -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="classSelect">Lớp</label>
+          <select id="classSelect" required>
+            <option value="">-- Chọn Lớp dạy --</option>
+            <option value="Kids 12">TKids 12</option>
+          <option value="Kids 34">Kids 34</option>
+          <option value="Kids 345">Kids 345</option>
+          <option value="Kids 45">Kids 45</option>
+          <option value="Kids 56">Kids 56</option>
+          <option value="Kids 678">Kids 678</option>
+          <option value="Pre-IELTS">Pre-IELTS</option>
+          <option value="IELTS 09">IELTS 09</option>
+          <option value="IELTS 10">IELTS 10</option>
+          <option value="IELTS 11">IELTS 11</option>
+          <option value="IELTS 12">IELTS 12</option>
+          <option value="IELTS 14">IELTS 14</option>
+          <option value="IELTS 15">IELTS 15</option>
+          <option value="Kids 12-26">Kids 12-26</option>
+          <option value="Kids 345-26">Kids 345-26</option>
+          <option value="Kids 678-26">Kids 678-26</option>
+          <option value="Chuyên 06">Chuyên 06</option>
+          <option value="B1">B1</option>
+          <option value="Gia sư">Gia sư</option>
+          <option value="IELTS Cấp tốc">IELTS Cấp tốc</option>
+          <option value="Khác">Khác</option>
+            <!-- <r Huy có thể thêm/sửa tên lớp ở đây -->
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="periodCount">Tiết/Ca theo PPCT</label>
+            <input type="number" id="periodCount" value="1" min="1" required>
+          </div>
+          <div class="form-group">
+            <label for="absentCount">Số HS vắng</label>
+            <select id="absentCount" onchange="toggleAbsentNames()"></select>
+          </div>
+        </div>
+
+        <!-- Ô điền tên HS vắng (Hiện ra khi Số HS vắng > 0) -->
+        <div class="form-group" id="absentNamesGroup">
+          <label for="absentNames" style="color: #c0392b;">Danh sách tên HS vắng:</label>
+          <input type="text" id="absentNames" placeholder="Nhập tên các em vắng (cách nhau bởi dấu phẩy)...">
+        </div>
+
+        <div class="form-group">
+          <label for="lessonName">Tên bài dạy</label>
+          <input type="text" id="lessonName" placeholder="VD: Unit 1 - PU 0..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="comments">Nhận xét buổi học</label>
+          <textarea id="comments" placeholder="Nhập nhận xét tình hình lớp; Các em chủ động học; Có dùng điện thoại khi chưa được phép; Không chịu làm bài GV giao..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Xếp loại</label>
+          <select id="rating">
+            <option value="Tốt">Tốt</option>
+            <option value="Khá">Khá</option>
+            <option value="Trung bình">Trung bình</option>
+            <option value="Cần cố gắng">Cần cố gắng</option>
+          </select>
+        </div>
+
+        <button type="submit" id="submitBtn">XÁC NHẬN</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // URL Web App Google Apps Script của anh
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS7oedUASwolKU5PcAMmCZfQ0FVp0zJgSVRoayIcSCQdCWftTIkTaC6sRwxJ42oBwhTg/exec";
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Set ngày mặc định theo giờ địa phương YYYY-MM-DD
+      const today = new Date().toLocaleDateString('en-CA');
+      document.getElementById('reportDate').value = today;
+
+      // Render danh sách chọn từ 0 -> 30 học sinh vắng
+      const absentSelect = document.getElementById('absentCount');
+      if (absentSelect) {
+        absentSelect.innerHTML = '';
+        for (let i = 0; i <= 30; i++) {
+          let opt = document.createElement('option');
+          opt.value = i;
+          opt.innerHTML = i + ' học sinh';
+          absentSelect.appendChild(opt);
+        }
+      }
+    });
+
+    // Ẩn/Hiện ô nhập tên học sinh vắng
+    function toggleAbsentNames() {
+      const count = document.getElementById('absentCount').value;
+      const namesGroup = document.getElementById('absentNamesGroup');
+      if (parseInt(count) > 0) {
+        namesGroup.style.display = 'block';
+      } else {
+        namesGroup.style.display = 'none';
+        document.getElementById('absentNames').value = '';
+      }
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'ĐANG GỬI DỮ LIỆU...';
+
+      // Lấy tên HS vắng nếu có
+      const absentCountVal = document.getElementById('absentCount').value;
+      const absentNamesVal = document.getElementById('absentNames').value;
+      let absentDetail = absentCountVal + " học sinh";
+      if (parseInt(absentCountVal) > 0 && absentNamesVal.trim() !== "") {
+        absentDetail += " (" + absentNamesVal.trim() + ")";
+      }
+
+      const formData = {
+        reportDate: document.getElementById('reportDate').value,
+        reporter: document.getElementById('reporter').value,
+        classCount: document.getElementById('classSelect').value,
+        absentCount: absentDetail, // Gửi cả số lượng + tên HS vắng
+        amount: document.getElementById('periodCount').value,
+        paidStudents: document.getElementById('rating').value,
+        notes: "Bài dạy: " + document.getElementById('lessonName').value + " | Nhận xét: " + document.getElementById('comments').value
+      };
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert("🎉 Xác nhận thành công! Dữ liệu đã được lưu.");
+        document.getElementById('reportForm').reset();
+        
+        // Reset ngày & trạng thái ban đầu
+        document.getElementById('reportDate').value = new Date().toLocaleDateString('en-CA');
+        document.getElementById('periodCount').value = 1;
+        toggleAbsentNames();
+        
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'XÁC NHẬN';
+      })
+      .catch(error => {
+        alert("❌ Lỗi gửi dữ liệu: " + error);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'XÁC NHẬN';
+      });
+    }
+  </script>
+</body>
+</html>
