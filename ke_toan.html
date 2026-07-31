@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trung tâm ngoại ngữ Aplus - Báo cáo Kế toán</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f0f2f5; margin: 0; padding: 0; display: flex; justify-content: center; min-height: 100vh; }
+    .wrapper { width: 100%; max-width: 800px; margin: 0 auto; position: relative; }
+    
+    .header-banner {
+      background-color: #03522a; color: white; text-align: center;
+      padding: 30px 20px 60px 20px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+    }
+    .header-banner .sub-title { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; opacity: 0.9; font-weight: 600; }
+    .header-banner .main-title { font-size: 24px; font-weight: bold; margin: 0; }
+
+    .form-card {
+      background: #ffffff; border-radius: 16px; padding: 35px 40px; margin: -35px 20px 40px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08); position: relative; z-index: 10;
+    }
+
+    .btn-home {
+      display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+      color: #03522a; font-weight: 700; font-size: 14px; margin-bottom: 20px;
+      padding: 8px 14px; background-color: #eaf4ee; border-radius: 8px; transition: background-color 0.2s;
+    }
+    .btn-home:hover { background-color: #d8ebd2; }
+
+    .form-group { margin-bottom: 22px; }
+    .form-row { display: flex; gap: 20px; }
+    .form-row .form-group { flex: 1; }
+
+    label { display: block; font-weight: 600; font-size: 14px; color: #333; margin-bottom: 8px; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid #dcdfe6; border-radius: 8px;
+      font-size: 14px; color: #333; background-color: #fff; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #03522a; }
+
+    .input-group { display: flex; align-items: center; }
+    .input-group input { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+    .input-group-addon {
+      background-color: #eaf4ee; color: #03522a; font-weight: bold; padding: 12px 15px;
+      border: 1px solid #dcdfe6; border-left: none; border-top-right-radius: 8px; border-bottom-right-radius: 8px; font-size: 13px;
+    }
+
+    textarea { resize: vertical; min-height: 80px; }
+
+    button[type="submit"] {
+      width: 100%; padding: 14px; background-color: #03522a; color: white;
+      border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px;
+    }
+    button[type="submit"]:hover { background-color: #023e1f; }
+
+    @media (max-width: 600px) {
+      .form-card { padding: 20px; margin-left: 10px; margin-right: 10px; }
+      .form-row { flex-direction: column; gap: 0; }
+      .header-banner .main-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="header-banner">
+      <div class="sub-title">CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN GIÁO DỤC - DU LỊCH - DU HỌC APLUS</div>
+      <h1 class="main-title">Trung tâm ngoại ngữ Aplus</h1>
+    </div>
+
+    <div class="form-card">
+      <a href="index.html" class="btn-home">⬅ Quay lại Trang chủ</a>
+
+      <form id="accountingForm" onsubmit="handleFormSubmit(event)">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reportDate">Ngày báo cáo</label>
+            <input type="date" id="reportDate" required>
+          </div>
+          <div class="form-group">
+            <label for="txCount">Số lượng giao dịch</label>
+            <input type="number" id="txCount" value="1" min="1" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="txType">Loại giao dịch</label>
+            <select id="txType" required>
+              <option value="Thu học phí">Thu học phí</option>
+              <option value="Chi vận hành">Chi vận hành</option>
+              <option value="Chi lương / Thù lao">Chi lương / Thù lao</option>
+              <option value="Tổng hợp Thu - Chi">Tổng hợp Thu - Chi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="method">Hình thức</label>
+            <select id="method" required>
+              <option value="Chuyển khoản">Chuyển khoản</option>
+              <option value="Tiền mặt">Tiền mặt</option>
+              <option value="Cả hai">Cả hai (CK + TM)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="amount">Số tiền tổng cộng</label>
+            <div class="input-group">
+              <input type="number" id="amount" value="0" min="0" required>
+              <div class="input-group-addon">VNĐ</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="category">Lớp / Danh mục chi</label>
+            <input type="text" id="category" placeholder="VD: IELTS K1, Chi tiền điện..." required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Nội dung / Diễn giải chi tiết</label>
+          <textarea id="description" placeholder="Mô tả tóm tắt các phát sinh giao dịch trong ngày..."></textarea>
+        </div>
+
+        <hr style="border: 0; border-top: 1px dashed #dcdfe6; margin: 25px 0;">
+        <h4 style="margin-top: 0; color: #03522a;">📌 TIẾN ĐỘ & ĐỀ XUẤT KẾ TOÁN</h4>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="payrollStatus">Hoàn thành Bảng lương tháng</label>
+            <select id="payrollStatus">
+              <option value="Chưa đến kỳ">Chưa đến kỳ</option>
+              <option value="Đang tính toán">Đang tính toán</option>
+              <option value="Đã hoàn thành">Đã hoàn thành</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="feeReminderStatus">Nhắc Đóng phí theo kỳ</label>
+            <select id="feeReminderStatus">
+              <option value="Đã gửi thông báo">Đã gửi thông báo</option>
+              <option value="Đang rà soát danh sách">Đang rà soát danh sách</option>
+              <option value="Chưa xử lý">Chưa xử lý</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="proposals">Đề xuất khác (nếu có)</label>
+          <textarea id="proposals" placeholder="Đề xuất duyệt chi, mua sắm vật tư, các trường hợp nợ phí cần CEO hỗ trợ..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">XÁC NHẬN BÁO CÁO KẾ TOÁN</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS7oedUASwolKU5PcAMmCZfQ0FVp0zJgSVRoayIcSCQdCWftTIkTaC6sRwxJ42oBwhTg/exec";
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('reportDate').value = new Date().toLocaleDateString('en-CA');
+    });
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'ĐANG GỬI DỮ LIỆU...';
+
+      const formData = {
+        formType: "KE_TOAN",
+        reportDate: document.getElementById('reportDate').value,
+        txCount: document.getElementById('txCount').value + " giao dịch",
+        txType: document.getElementById('txType').value,
+        description: document.getElementById('description').value,
+        amount: document.getElementById('amount').value,
+        method: document.getElementById('method').value,
+        category: document.getElementById('category').value,
+        payrollStatus: document.getElementById('payrollStatus').value,
+        feeReminderStatus: document.getElementById('feeReminderStatus').value,
+        proposals: document.getElementById('proposals').value
+      };
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert("🎉 Báo cáo Kế toán đã gửi thành công!");
+        window.location.href = "index.html";
+      })
+      .catch(error => {
+        alert("❌ Lỗi gửi dữ liệu: " + error);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'XÁC NHẬN BÁO CÁO KẾ TOÁN';
+      });
+    }
+  </script>
+</body>
+</html>
