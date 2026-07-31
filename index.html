@@ -49,6 +49,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
     }
     .menu-card:hover { 
       border-color: var(--primary-green); 
@@ -58,37 +59,124 @@
     }
     .menu-card h3 { margin: 0 0 8px 0; color: var(--primary-green); font-size: 19px; }
     .menu-card p { margin: 0; font-size: 13px; color: #666; line-height: 1.4; }
+
+    /* STYLE KHUNG POPUP BẢO MẬT MẬT KHẨU */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      backdrop-filter: blur(2px);
+    }
+    .modal-box {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: popupAnim 0.2s ease-out;
+    }
+    @keyframes popupAnim {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-box h3 { margin: 0 0 10px 0; color: var(--primary-green); font-size: 18px; }
+    .modal-box p { margin: 0 0 15px 0; font-size: 13px; color: #666; }
+    .modal-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      text-align: center;
+      outline: none;
+      margin-bottom: 15px;
+    }
+    .modal-box input:focus { border-color: var(--primary-green); }
+    .modal-actions { display: flex; gap: 10px; }
+    .modal-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-confirm { background-color: var(--primary-green); color: white; }
+    .btn-cancel { background-color: #e0e0e0; color: #333; }
   </style>
 </head>
 <body>
 
-  <body>
+  <!-- POPUP NHẬP MẬT KHẨU BẢO VỆ -->
+  <div id="passwordModal" class="modal-overlay">
+    <div class="modal-box">
+      <h3>🔒 XÁC NHẬN BẢO MẬT</h3>
+      <p>Vui lòng nhập mật khẩu Quản lý để tiếp tục</p>
+      <input type="password" id="managerPassword" placeholder="Nhập mật khẩu..." onkeypress="if(event.key==='Enter') verifyPassword()">
+      <div class="modal-actions">
+        <button class="modal-btn btn-cancel" onclick="closeModal()">Hủy</button>
+        <button class="modal-btn btn-confirm" onclick="verifyPassword()">Xác nhận</button>
+      </div>
+    </div>
+  </div>
 
   <div class="wrapper">
-    <!-- Header chuẩn mẫu cũ -->
     <div class="header-banner">
-      <div class="sub-title">CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN GIÁO DỤC - DU LỊCH - DU HỌC APLUS</div>
-      <h1 class="main-title">Trung tâm ngoại ngữ Aplus</h1>
+      <h1>Trung tâm ngoại ngữ Aplus</h1>
+      <p>CỔNG THÔNG TIN VÀ BÁO CÁO VẬN HÀNH</p>
     </div>
 
     <div class="card-body">
       <h2 style="text-align: center; color: #333; font-size: 18px; margin-top: 0;">Vui lòng chọn chức năng báo cáo</h2>
       
       <div class="menu-grid">
-        <!-- Nút 1: Chuyển sang trang Điểm danh của Giáo viên -->
+        <!-- Nút 1: Chuyển thẳng sang trang Điểm danh của Giáo viên -->
         <a href="diem_danh.html" class="menu-card">
           <h3>📋 Báo cáo Điểm danh</h3>
           <p>Dành cho Giáo viên báo cáo tình hình giảng dạy & sĩ số lớp học</p>
         </a>
 
-        <!-- Nút 2: Chuyển sang trang Báo cáo Quản lý -->
-        <a href="quan_ly.html" class="menu-card">
-          <h3>📊 Báo cáo Quản lý</h3>
+        <!-- Nút 2: Báo cáo Quản lý (Kích hoạt Popup đòi Mật khẩu) -->
+        <div class="menu-card" onclick="openModal()">
+          <h3>📊 Báo cáo Quản lý 🔒</h3>
           <p>Dành cho Nhân sự/Quản lý báo cáo tài chính & công việc trong ngày</p>
-        </a>
+        </div>
       </div>
     </div>
   </div>
 
+  <script>
+    // Mật khẩu chính xác để vào Form Quản lý
+    const CORRECT_PASSWORD = "Aplus";
+
+    function openModal() {
+      document.getElementById('passwordModal').style.display = 'flex';
+      document.getElementById('managerPassword').value = '';
+      document.getElementById('managerPassword').focus();
+    }
+
+    function closeModal() {
+      document.getElementById('passwordModal').style.display = 'none';
+    }
+
+    function verifyPassword() {
+      const inputPass = document.getElementById('managerPassword').value;
+      if (inputPass === CORRECT_PASSWORD) {
+        // Nhập đúng Mật khẩu -> Cho phép vào trang quan_ly.html
+        window.location.href = "quan_ly.html";
+      } else {
+        alert("❌ Mật khẩu không chính xác! Vui lòng thử lại.");
+        document.getElementById('managerPassword').value = '';
+        document.getElementById('managerPassword').focus();
+      }
+    }
+  </script>
 </body>
 </html>
