@@ -57,6 +57,25 @@
       z-index: 10;
     }
 
+    /* Style nút quay về trang chủ */
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #03522a;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      background-color: #eaf4ee;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+    .btn-home:hover {
+      background-color: #d8ebd2;
+    }
+
     .form-group {
       margin-bottom: 22px;
     }
@@ -108,7 +127,7 @@
       border: 1px dashed #a2d2b5;
     }
 
-    button {
+    button[type="submit"] {
       width: 100%;
       padding: 14px;
       background-color: #03522a;
@@ -121,10 +140,10 @@
       margin-top: 10px;
       transition: background-color 0.2s;
     }
-    button:hover {
+    button[type="submit"]:hover {
       background-color: #023e1f;
     }
-    button:disabled {
+    button[type="submit"]:disabled {
       background-color: #999;
       cursor: not-allowed;
     }
@@ -147,6 +166,10 @@
 
     <!-- Khung nội dung Form -->
     <div class="form-card">
+      
+      <!-- Nút Quay lại Trang chủ -->
+      <a href="index.html" class="btn-home">⬅ Quay lại Trang chủ</a>
+
       <form id="reportForm" onsubmit="handleFormSubmit(event)">
         
         <div class="form-group">
@@ -159,19 +182,18 @@
           <select id="reporter" required>
             <option value="">-- Chọn Giáo viên --</option>
             <option value="Phan Ngọc Huy">Phan Ngọc Huy</option>
-          <option value="Phạm Ngọc Hải">Phạm Ngọc Hải</option>
-          <option value="Lê Thị Thùy Trang">Lê Thị Thùy Trang</option>
-          <option value="Lê Trung Nguyên">Lê Trung Nguyên</option>
-          <option value="Trịnh Hữu Phát">Trịnh Hữu Phát</option>
-          <option value="Hồ Mai Phương">Hồ Mai Phương</option>
-          <option value="Phạm Thị Trà My">Phạm Thị Trà My</option>
-          <option value="Bùi Ngọc Thiên Anh">Bùi Ngọc Thiên Anh</option>
-          <option value="Vũ Khánh Vân">Vũ Khánh Vân</option>
-          <option value="Julie Ann">Julie Ann</option>
-          <option value="Nguyễn Đức Anh">Nguyễn Đức Anh</option>
-          <option value="Nhân sự A">Nhân sự A</option>
-          <option value="Nhân sự B">Nhân sự B</option>
-            <!-- Mr Huy có thể thêm/sửa tên giáo viên ở đây -->
+            <option value="Phạm Ngọc Hải">Phạm Ngọc Hải</option>
+            <option value="Lê Thị Thùy Trang">Lê Thị Thùy Trang</option>
+            <option value="Lê Trung Nguyên">Lê Trung Nguyên</option>
+            <option value="Trịnh Hữu Phát">Trịnh Hữu Phát</option>
+            <option value="Hồ Mai Phương">Hồ Mai Phương</option>
+            <option value="Phạm Thị Trà My">Phạm Thị Trà My</option>
+            <option value="Bùi Ngọc Thiên Anh">Bùi Ngọc Thiên Anh</option>
+            <option value="Vũ Khánh Vân">Vũ Khánh Vân</option>
+            <option value="Julie Ann">Julie Ann</option>
+            <option value="Nguyễn Đức Anh">Nguyễn Đức Anh</option>
+            <option value="Nhân sự A">Nhân sự A</option>
+            <option value="Nhân sự B">Nhân sự B</option>
           </select>
         </div>
 
@@ -179,28 +201,27 @@
           <label for="classSelect">Lớp</label>
           <select id="classSelect" required>
             <option value="">-- Chọn Lớp dạy --</option>
-            <option value="Kids 12">TKids 12</option>
-          <option value="Kids 34">Kids 34</option>
-          <option value="Kids 345">Kids 345</option>
-          <option value="Kids 45">Kids 45</option>
-          <option value="Kids 56">Kids 56</option>
-          <option value="Kids 678">Kids 678</option>
-          <option value="Pre-IELTS">Pre-IELTS</option>
-          <option value="IELTS 09">IELTS 09</option>
-          <option value="IELTS 10">IELTS 10</option>
-          <option value="IELTS 11">IELTS 11</option>
-          <option value="IELTS 12">IELTS 12</option>
-          <option value="IELTS 14">IELTS 14</option>
-          <option value="IELTS 15">IELTS 15</option>
-          <option value="Kids 12-26">Kids 12-26</option>
-          <option value="Kids 345-26">Kids 345-26</option>
-          <option value="Kids 678-26">Kids 678-26</option>
-          <option value="Chuyên 06">Chuyên 06</option>
-          <option value="B1">B1</option>
-          <option value="Gia sư">Gia sư</option>
-          <option value="IELTS Cấp tốc">IELTS Cấp tốc</option>
-          <option value="Khác">Khác</option>
-            <!-- <r Huy có thể thêm/sửa tên lớp ở đây -->
+            <option value="Kids 12">Kids 12</option>
+            <option value="Kids 34">Kids 34</option>
+            <option value="Kids 345">Kids 345</option>
+            <option value="Kids 45">Kids 45</option>
+            <option value="Kids 56">Kids 56</option>
+            <option value="Kids 678">Kids 678</option>
+            <option value="Pre-IELTS">Pre-IELTS</option>
+            <option value="IELTS 09">IELTS 09</option>
+            <option value="IELTS 10">IELTS 10</option>
+            <option value="IELTS 11">IELTS 11</option>
+            <option value="IELTS 12">IELTS 12</option>
+            <option value="IELTS 14">IELTS 14</option>
+            <option value="IELTS 15">IELTS 15</option>
+            <option value="Kids 12-26">Kids 12-26</option>
+            <option value="Kids 345-26">Kids 345-26</option>
+            <option value="Kids 678-26">Kids 678-26</option>
+            <option value="Chuyên 06">Chuyên 06</option>
+            <option value="B1">B1</option>
+            <option value="Gia sư">Gia sư</option>
+            <option value="IELTS Cấp tốc">IELTS Cấp tốc</option>
+            <option value="Khác">Khác</option>
           </select>
         </div>
 
@@ -247,7 +268,6 @@
   </div>
 
   <script>
-    // URL Web App Google Apps Script của anh
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS7oedUASwolKU5PcAMmCZfQ0FVp0zJgSVRoayIcSCQdCWftTIkTaC6sRwxJ42oBwhTg/exec";
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -299,7 +319,7 @@
         reportDate: document.getElementById('reportDate').value,
         reporter: document.getElementById('reporter').value,
         classCount: document.getElementById('classSelect').value,
-        absentCount: absentDetail, // Gửi cả số lượng + tên HS vắng
+        absentCount: absentDetail,
         amount: document.getElementById('periodCount').value,
         paidStudents: document.getElementById('rating').value,
         notes: "Bài dạy: " + document.getElementById('lessonName').value + " | Nhận xét: " + document.getElementById('comments').value
@@ -313,15 +333,9 @@
       })
       .then(() => {
         alert("🎉 Xác nhận thành công! Dữ liệu đã được lưu.");
-        document.getElementById('reportForm').reset();
         
-        // Reset ngày & trạng thái ban đầu
-        document.getElementById('reportDate').value = new Date().toLocaleDateString('en-CA');
-        document.getElementById('periodCount').value = 1;
-        toggleAbsentNames();
-        
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'XÁC NHẬN';
+        // Tự động điều hướng quay về trang chủ (index.html)
+        window.location.href = "index.html";
       })
       .catch(error => {
         alert("❌ Lỗi gửi dữ liệu: " + error);
