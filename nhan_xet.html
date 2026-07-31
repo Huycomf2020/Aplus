@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trung tâm ngoại ngữ Aplus - Nhận xét Học viên tháng</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: #f0f2f5; margin: 0; padding: 0; display: flex; justify-content: center; min-height: 100vh; }
+    .wrapper { width: 100%; max-width: 800px; margin: 0 auto; position: relative; }
+    
+    .header-banner {
+      background-color: #03522a; color: white; text-align: center;
+      padding: 30px 20px 60px 20px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
+    }
+    .header-banner .sub-title { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; opacity: 0.9; font-weight: 600; }
+    .header-banner .main-title { font-size: 24px; font-weight: bold; margin: 0; }
+
+    .form-card {
+      background: #ffffff; border-radius: 16px; padding: 35px 40px; margin: -35px 20px 40px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08); position: relative; z-index: 10;
+    }
+
+    .btn-home {
+      display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+      color: #03522a; font-weight: 700; font-size: 14px; margin-bottom: 20px;
+      padding: 8px 14px; background-color: #eaf4ee; border-radius: 8px; transition: background-color 0.2s;
+    }
+    .btn-home:hover { background-color: #d8ebd2; }
+
+    .form-group { margin-bottom: 22px; }
+    .form-row { display: flex; gap: 20px; }
+    .form-row .form-group { flex: 1; }
+
+    label { display: block; font-weight: 600; font-size: 14px; color: #333; margin-bottom: 8px; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid #dcdfe6; border-radius: 8px;
+      font-size: 14px; color: #333; background-color: #fff; outline: none; transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #03522a; }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    button[type="submit"] {
+      width: 100%; padding: 14px; background-color: #03522a; color: white;
+      border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px;
+    }
+    button[type="submit"]:hover { background-color: #023e1f; }
+
+    @media (max-width: 600px) {
+      .form-card { padding: 20px; margin-left: 10px; margin-right: 10px; }
+      .form-row { flex-direction: column; gap: 0; }
+      .header-banner .main-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="header-banner">
+      <div class="sub-title">CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN GIÁO DỤC - DU LỊCH - DU HỌC APLUS</div>
+      <h1 class="main-title">Trung tâm ngoại ngữ Aplus</h1>
+    </div>
+
+    <div class="form-card">
+      <a href="index.html" class="btn-home">⬅ Quay lại Trang chủ</a>
+
+      <form id="commentForm" onsubmit="handleFormSubmit(event)">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="teacherName">Giáo viên nhận xét</label>
+            <select id="teacherName" required>
+              <option value="">-- Chọn Giáo viên --</option>
+              <option value="Phan Ngọc Huy">Phan Ngọc Huy</option>
+              <option value="Phạm Ngọc Hải">Phạm Ngọc Hải</option>
+              <option value="Lê Thị Thùy Trang">Lê Thị Thùy Trang</option>
+              <option value="Lê Trung Nguyên">Lê Trung Nguyên</option>
+              <option value="Trịnh Hữu Phát">Trịnh Hữu Phát</option>
+              <option value="Hồ Mai Phương">Hồ Mai Phương</option>
+              <option value="Phạm Thị Trà My">Phạm Thị Trà My</option>
+              <option value="Bùi Ngọc Thiên Anh">Bùi Ngọc Thiên Anh</option>
+              <option value="Vũ Khánh Vân">Vũ Khánh Vân</option>
+              <option value="Julie Ann">Julie Ann</option>
+              <option value="Nguyễn Đức Anh">Nguyễn Đức Anh</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="month">Nhận xét cho Tháng</label>
+            <select id="month" required></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="className">Lớp</label>
+          <select id="className" required>
+            <option value="">-- Chọn Lớp --</option>
+            <option value="Kids 12">Kids 12</option>
+            <option value="Kids 34">Kids 34</option>
+            <option value="Kids 345">Kids 345</option>
+            <option value="Kids 45">Kids 45</option>
+            <option value="Kids 56">Kids 56</option>
+            <option value="Kids 678">Kids 678</option>
+            <option value="Pre-IELTS">Pre-IELTS</option>
+            <option value="IELTS 09">IELTS 09</option>
+            <option value="IELTS 10">IELTS 10</option>
+            <option value="IELTS 11">IELTS 11</option>
+            <option value="IELTS 12">IELTS 12</option>
+            <option value="IELTS 14">IELTS 14</option>
+            <option value="IELTS 15">IELTS 15</option>
+            <option value="B1">B1</option>
+            <option value="Chuyên 06">Chuyên 06</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="studentName">Họ và tên HS</label>
+            <input type="text" id="studentName" placeholder="VD: Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label for="englishName">English name</label>
+            <input type="text" id="englishName" placeholder="VD: Alex, Peter...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Nhận Xét chi tiết trong tháng</label>
+          <textarea id="comment" placeholder="Nhận xét tình hình học tập, ý thức làm bài tập về nhà, kỹ năng Nghe - Nói - Đọc - Viết..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Xếp loại tháng</label>
+          <select id="rating" required>
+            <option value="Xuất sắc">Xuất sắc</option>
+            <option value="Tốt">Tốt</option>
+            <option value="Khá">Khá</option>
+            <option value="Trung bình">Trung bình</option>
+            <option value="Cần cố gắng">Cần cố gắng</option>
+          </select>
+        </div>
+
+        <button type="submit" id="submitBtn">XÁC NHẬN GỬI NHẬN XÉT</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS7oedUASwolKU5PcAMmCZfQ0FVp0zJgSVRoayIcSCQdCWftTIkTaC6sRwxJ42oBwhTg/exec";
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Tự động tạo danh sách 12 Tháng
+      const monthSelect = document.getElementById('month');
+      const currentMonth = new Date().getMonth() + 1;
+      for (let i = 1; i <= 12; i++) {
+        let opt = document.createElement('option');
+        opt.value = "Tháng " + i;
+        opt.innerHTML = "Tháng " + i;
+        if (i === currentMonth) opt.selected = true;
+        monthSelect.appendChild(opt);
+      }
+    });
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'ĐANG GỬI DỮ LIỆU...';
+
+      const formData = {
+        formType: "NHAN_XET",
+        teacherName: document.getElementById('teacherName').value,
+        month: document.getElementById('month').value,
+        className: document.getElementById('className').value,
+        studentName: document.getElementById('studentName').value,
+        englishName: document.getElementById('englishName').value,
+        comment: document.getElementById('comment').value,
+        rating: document.getElementById('rating').value
+      };
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert("🎉 Đã lưu đánh giá tháng cho học viên thành công!");
+        document.getElementById('studentName').value = '';
+        document.getElementById('englishName').value = '';
+        document.getElementById('comment').value = '';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'XÁC NHẬN GỬI NHẬN XÉT';
+      })
+      .catch(error => {
+        alert("❌ Lỗi gửi dữ liệu: " + error);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'XÁC NHẬN GỬI NHẬN XÉT';
+      });
+    }
+  </script>
+</body>
+</html>
