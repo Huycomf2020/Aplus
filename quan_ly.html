@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trung tâm ngoại ngữ Aplus - Báo cáo Quản lý</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    
+    body { 
+      background-color: #f0f2f5; 
+      margin: 0; 
+      padding: 0; 
+      display: flex; 
+      justify-content: center; 
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .header-banner {
+      background-color: #03522a;
+      color: white;
+      text-align: center;
+      padding: 30px 20px 60px 20px;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+    .header-banner .sub-title {
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      opacity: 0.9;
+      font-weight: 600;
+    }
+    .header-banner .main-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .form-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 35px 40px;
+      margin: -35px 20px 40px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 10;
+    }
+
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: #03522a;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      background-color: #eaf4ee;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+    .btn-home:hover { background-color: #d8ebd2; }
+
+    .form-group { margin-bottom: 22px; }
+    .form-row { display: flex; gap: 20px; }
+    .form-row .form-group { flex: 1; }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: #333333;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #dcdfe6;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #333;
+      background-color: #fff;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #03522a;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+    }
+    .input-group input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .input-group-addon {
+      background-color: #eaf4ee;
+      color: #03522a;
+      font-weight: bold;
+      padding: 12px 15px;
+      border: 1px solid #dcdfe6;
+      border-left: none;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      font-size: 13px;
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background-color: #03522a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s;
+    }
+    button[type="submit"]:hover { background-color: #023e1f; }
+    button[type="submit"]:disabled { background-color: #999; cursor: not-allowed; }
+
+    @media (max-width: 600px) {
+      .form-card { padding: 20px; margin-left: 10px; margin-right: 10px; }
+      .form-row { flex-direction: column; gap: 0; }
+      .header-banner .main-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="header-banner">
+      <div class="sub-title">CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN GIÁO DỤC - DU LỊCH - DU HỌC APLUS</div>
+      <h1 class="main-title">Trung tâm ngoại ngữ Aplus</h1>
+    </div>
+
+    <div class="form-card">
+      <a href="index.html" class="btn-home">⬅ Quay lại Trang chủ</a>
+
+      <form id="managerForm" onsubmit="handleFormSubmit(event)">
+        
+        <div class="form-group">
+          <label for="reportDate">Ngày báo cáo</label>
+          <input type="date" id="reportDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="reporter">Người báo cáo</label>
+          <select id="reporter" required>
+            <option value="">-- Chọn nhân sự --</option>
+            <option value="Nhân sự A">Nhân sự A</option>
+            <option value="Nhân sự B">Nhân sự B</option>
+            <option value="Quản lý CS1">Quản lý CS1</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="classCount">Số lớp học hôm nay</label>
+            <select id="classCount" required></select>
+          </div>
+          <div class="form-group">
+            <label for="absentCount">Số HS vắng</label>
+            <select id="absentCount" required></select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="revenue">Số tiền thu được</label>
+            <div class="input-group">
+              <input type="number" id="revenue" value="0" min="0" required>
+              <div class="input-group-addon">VNĐ</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="paidStudents">Số HS đóng</label>
+            <input type="number" id="paidStudents" value="0" min="0" required readonly style="background-color: #f8f9fa;">
+          </div>
+        </div>
+
+        <!-- HÀNG CHOI BOX CHUYỂN KHOẢN VÀ TIỀN MẶT -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="transferCount">Số em Chuyển khoản</label>
+            <select id="transferCount" onchange="updateTotalPaid()"></select>
+          </div>
+          <div class="form-group">
+            <label for="cashCount">Số em Tiền mặt</label>
+            <select id="cashCount" onchange="updateTotalPaid()"></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tasks">Ghi chú các việc đã hoàn thành</label>
+          <textarea id="tasks" placeholder="- Đã hoàn thành báo cáo trong ngày&#10;- Hoàn tất kiểm tra sĩ số lớp&#10;- Chưa hoàn thành phân lớp Kids/IELTS..."></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">XÁC NHẬN BÁO CÁO</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS7oedUASwolKU5PcAMmCZfQ0FVp0zJgSVRoayIcSCQdCWftTIkTaC6sRwxJ42oBwhTg/exec";
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Set ngày hôm nay
+      document.getElementById('reportDate').value = new Date().toLocaleDateString('en-CA');
+
+      // Render Droplist Số lớp (1 -> 20 lớp)
+      const classSelect = document.getElementById('classCount');
+      for (let i = 1; i <= 20; i++) {
+        let opt = document.createElement('option');
+        opt.value = i + ' lớp';
+        opt.innerHTML = i + ' lớp';
+        classSelect.appendChild(opt);
+      }
+
+      // Render Droplist Số HS vắng (0 -> 50 em)
+      const absentSelect = document.getElementById('absentCount');
+      for (let i = 0; i <= 50; i++) {
+        let opt = document.createElement('option');
+        opt.value = i + ' học sinh';
+        opt.innerHTML = i + ' học sinh';
+        absentSelect.appendChild(opt);
+      }
+
+      // Render Droplist Chuyển khoản & Tiền mặt (0 -> 50 em)
+      const transferSelect = document.getElementById('transferCount');
+      const cashSelect = document.getElementById('cashCount');
+      for (let i = 0; i <= 50; i++) {
+        let opt1 = document.createElement('option');
+        opt1.value = i; opt1.innerHTML = i + ' học sinh';
+        transferSelect.appendChild(opt1);
+
+        let opt2 = document.createElement('option');
+        opt2.value = i; opt2.innerHTML = i + ' học sinh';
+        cashSelect.appendChild(opt2);
+      }
+    });
+
+    // Tự động tính tổng Số HS đóng = Chuyển khoản + Tiền mặt
+    function updateTotalPaid() {
+      const transfer = parseInt(document.getElementById('transferCount').value) || 0;
+      const cash = parseInt(document.getElementById('cashCount').value) || 0;
+      document.getElementById('paidStudents').value = transfer + cash;
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'ĐANG GỬI DỮ LIỆU...';
+
+      const formData = {
+        formType: "QUAN_LY", // Đánh dấu nguồn gửi từ Form Quản lý
+        reportDate: document.getElementById('reportDate').value,
+        reporter: document.getElementById('reporter').value,
+        classCount: document.getElementById('classCount').value,
+        absentCount: document.getElementById('absentCount').value,
+        revenue: document.getElementById('revenue').value,
+        paidStudents: document.getElementById('paidStudents').value,
+        transferCount: document.getElementById('transferCount').value + " em CK",
+        cashCount: document.getElementById('cashCount').value + " em TM",
+        tasks: document.getElementById('tasks').value
+      };
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alert("🎉 Đã gửi Báo cáo Quản lý thành công về Google Sheet!");
+        window.location.href = "index.html";
+      })
+      .catch(error => {
+        alert("❌ Lỗi gửi dữ liệu: " + error);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'XÁC NHẬN BÁO CÁO';
+      });
+    }
+  </script>
+</body>
+</html>
