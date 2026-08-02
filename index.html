@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cổng thông tin - Trung tâm ngoại ngữ Aplus</title>
-  <!-- 🌟 THÊM 2 DÒNG NÀY ĐỂ HIỆN LOGO APLUS KHI LƯU RA MÀN HÌNH CHỜ 🌟 -->
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <style>
@@ -12,56 +11,48 @@
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: var(--bg-gray); margin: 0; padding: 20px 10px; display: flex; justify-content: center; min-height: 100vh; }
     
-    .wrapper { width: 100%; max-width: 900px; margin-top: 20px; }
+    .wrapper { width: 100%; max-width: 900px; margin-top: 10px; }
     
     .header-banner { 
-      background-color: var(--primary-green); 
-      color: white; 
-      text-align: center; 
-      padding: 30px 20px 55px 20px; 
-      border-radius: 16px 16px 0 0; 
+      background-color: var(--primary-green); color: white; text-align: center; 
+      padding: 25px 20px 45px 20px; border-radius: 16px 16px 0 0; 
     }
     .header-banner .company-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-      opacity: 0.95;
-      text-transform: uppercase;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; opacity: 0.95; text-transform: uppercase;
     }
     .header-banner h1 { margin: 0; font-size: 26px; font-weight: 700; }
     .header-banner p { margin: 8px 0 0 0; font-size: 13px; opacity: 0.9; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .ticker-wrap {
+      background-color: #023e1f; color: #f1c40f; padding: 10px 15px; font-size: 13px; font-weight: 600;
+      border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; margin-top: -15px; position: relative; z-index: 12;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; white-space: nowrap;
+    }
+    .ticker-text { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
+    .ticker-wrap:hover .ticker-text { animation-play-state: paused; }
+    @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
     
     .card-body { 
-      background: white; border-radius: 20px; padding: 35px 25px; margin-top: -20px; 
+      background: white; border-radius: 20px; padding: 35px 25px; margin-top: 15px; 
       box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
     }
     
-    .menu-grid { 
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-      gap: 20px; margin-top: 25px; 
-    }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 25px; }
     
     .menu-card { 
-      background: #fafafa; border: 1px solid #e0e0e0; padding: 25px 18px; 
-      border-radius: 14px; text-decoration: none; color: #333; text-align: center; 
-      transition: all 0.25s ease; cursor: pointer; display: flex; flex-direction: column; align-items: center;
+      background: #fafafa; border: 1px solid #e0e0e0; padding: 25px 18px; border-radius: 14px; 
+      text-decoration: none; color: #333; text-align: center; transition: all 0.25s ease; cursor: pointer; 
+      display: flex; flex-direction: column; align-items: center;
     }
-    .menu-card:hover { 
-      border-color: var(--primary-green); transform: translateY(-4px); 
-      box-shadow: 0 6px 18px rgba(3, 82, 42, 0.12); background: #ffffff;
-    }
+    .menu-card:hover { border-color: var(--primary-green); transform: translateY(-4px); box-shadow: 0 6px 18px rgba(3, 82, 42, 0.12); background: #ffffff; }
     .menu-card h3 { margin: 0 0 8px 0; color: var(--primary-green); font-size: 18px; }
     .menu-card p { margin: 0; font-size: 13px; color: #666; line-height: 1.4; }
 
-    /* MODAL BẢO MẬT */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 999;
     }
-    .modal-box {
-      background: white; padding: 30px; border-radius: 16px; text-align: center; width: 90%; max-width: 360px;
-    }
+    .modal-box { background: white; padding: 30px; border-radius: 16px; text-align: center; width: 90%; max-width: 360px; }
     .modal-box h3 { margin: 0 0 10px 0; color: var(--primary-green); }
     .modal-box input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 15px; text-align: center; outline: none; }
     .modal-box input:focus { border-color: var(--primary-green); }
@@ -81,42 +72,43 @@
       <input type="password" id="passInput" placeholder="Nhập mật khẩu..." onkeypress="if(event.key==='Enter') verifyPass()">
       <div class="modal-actions">
         <button class="modal-btn btn-cancel" onclick="closeModal()">Hủy</button>
-        <button class="modal-btn btn-confirm" onclick="verifyPass()">Xác nhận</button>
+        <button class="modal-btn btn-confirm" id="btnConfirm" onclick="verifyPass()">Xác nhận</button>
       </div>
     </div>
   </div>
 
   <div class="wrapper">
-    <!-- Banner chuẩn tiêu đề Công ty & Trung tâm -->
     <div class="header-banner">
       <div class="company-title">CÔNG TY TNHH ĐẦU TƯ VÀ PHÁT TRIỂN GIÁO DỤC - DU LỊCH - DU HỌC APLUS</div>
       <h1>Trung tâm ngoại ngữ Aplus</h1>
       <p>CỔNG THÔNG TIN VÀ BÁO CÁO VẬN HÀNH</p>
     </div>
 
+    <div class="ticker-wrap">
+      <div class="ticker-text" id="tickerContent">
+        ⏳ Đang tải Thời khóa biểu và thông tin hôm nay...
+      </div>
+    </div>
+
     <div class="card-body">
       <h2 style="text-align: center; color: #333; font-size: 18px; margin-top: 0;">Vui lòng chọn chức năng báo cáo</h2>
       
       <div class="menu-grid">
-        <!-- 1. Điểm danh hằng ngày -->
         <a href="diem_danh.html" class="menu-card">
           <h3>📋 Điểm danh</h3>
           <p>Giáo viên báo cáo tiết dạy & sĩ số theo buổi</p>
         </a>
 
-        <!-- 2. Nhận xét Học viên cuối tháng -->
         <a href="nhan_xet.html" class="menu-card">
           <h3>📝 Nhận xét Tháng</h3>
           <p>Giáo viên đánh giá tình hình học tập HS định kỳ</p>
         </a>
 
-        <!-- 3. Báo cáo Quản lý -->
         <div class="menu-card" onclick="openAuth('QUAN_LY')">
           <h3>📊 Quản lý 🔒</h3>
           <p>Báo cáo vận hành & doanh thu ngày</p>
         </div>
 
-        <!-- 4. Báo cáo Kế toán -->
         <div class="menu-card" onclick="openAuth('KE_TOAN')">
           <h3>💰 Kế toán 🔒</h3>
           <p>Báo cáo tổng hợp thu chi & tiến độ lương</p>
@@ -126,9 +118,22 @@
   </div>
 
   <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS7oedUASwolKU5PcAMmCZfQ0FVp0zJgSVRoayIcSCQdCWftTIkTaC6sRwxJ42oBwhTg/exec";
+
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch(SCRIPT_URL + "?action=getTickerInfo")
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.tickerText) {
+            document.getElementById('tickerContent').innerHTML = data.tickerText;
+          }
+        })
+        .catch(err => {
+          document.getElementById('tickerContent').innerHTML = "📢 TRUNG TÂM NGOẠI NGỮ APLUS - CHÚC BẠN MỘT NGÀY LÀM VIỆC HIỆU QUẢ!";
+        });
+    });
+
     let currentTarget = "";
-    const PASS_QUAN_LY = "Aplus";
-    const PASS_KE_TOAN = "AplusKeToan";
 
     function openAuth(target) {
       currentTarget = target;
@@ -141,16 +146,39 @@
       document.getElementById('passwordModal').style.display = 'none';
     }
 
+    // 🔒 GỬI MẬT KHẨU LÊN BACKEND KIỂM TRA - KHÔNG LƯU MẬT KHẨU Ở WEB
     function verifyPass() {
-      const input = document.getElementById('passInput').value;
-      if (currentTarget === 'QUAN_LY' && input === PASS_QUAN_LY) {
-        window.location.href = "quan_ly.html";
-      } else if (currentTarget === 'KE_TOAN' && input === PASS_KE_TOAN) {
-        window.location.href = "ke_toan.html";
-      } else {
-        alert("❌ Mật khẩu không chính xác!");
-        document.getElementById('passInput').value = '';
+      const inputPass = document.getElementById('passInput').value;
+      const btnConfirm = document.getElementById('btnConfirm');
+      
+      if (!inputPass) {
+        alert("Vui lòng nhập mật khẩu!");
+        return;
       }
+
+      btnConfirm.disabled = true;
+      btnConfirm.innerText = "Đang kiểm tra...";
+
+      const checkUrl = `${SCRIPT_URL}?action=verifyPassword&target=${currentTarget}&password=${encodeURIComponent(inputPass)}`;
+
+      fetch(checkUrl)
+        .then(res => res.json())
+        .then(data => {
+          btnConfirm.disabled = false;
+          btnConfirm.innerText = "Xác nhận";
+
+          if (data && data.success) {
+            window.location.href = data.redirectUrl;
+          } else {
+            alert("❌ Mật khẩu không chính xác!");
+            document.getElementById('passInput').value = '';
+          }
+        })
+        .catch(err => {
+          btnConfirm.disabled = false;
+          btnConfirm.innerText = "Xác nhận";
+          alert("❌ Lỗi kết nối máy chủ xác thực!");
+        });
     }
   </script>
 </body>
