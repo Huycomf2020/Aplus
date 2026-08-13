@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trung tâm ngoại ngữ Aplus - Báo cáo Kế toán</title>
-  <!-- 🌟 THÊM 2 DÒNG NÀY ĐỂ HIỆN LOGO APLUS KHI LƯU RA MÀN HÌNH CHỜ 🌟 -->
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <style>
@@ -84,14 +83,15 @@
           </div>
           <div class="form-group">
             <label for="txCount">Số lượng giao dịch</label>
-            <input type="number" id="txCount" value="1" min="0" required>
+            <input type="number" id="txCount" value="0" min="0" required>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="txType">Loại giao dịch</label>
-            <select id="txType" required>
+            <select id="txType">
+              <option value="Không phát sinh">Không phát sinh thu chi</option>
               <option value="Thu học phí">Thu học phí</option>
               <option value="Chi vận hành">Chi vận hành</option>
               <option value="Chi lương / Thù lao">Chi lương / Thù lao</option>
@@ -100,7 +100,8 @@
           </div>
           <div class="form-group">
             <label for="method">Hình thức</label>
-            <select id="method" required>
+            <select id="method">
+              <option value="Không">Không</option>
               <option value="Chuyển khoản">Chuyển khoản</option>
               <option value="Tiền mặt">Tiền mặt</option>
               <option value="Cả hai">Cả hai (CK + TM)</option>
@@ -112,19 +113,20 @@
           <div class="form-group">
             <label for="amount">Số tiền tổng cộng</label>
             <div class="input-group">
-              <input type="number" id="amount" value="0" min="0" required>
+              <!-- ĐỔI THÀNH TYPE="TEXT" KÈM SỰ KIỆN TỰ ĐỊNH DẠNG DẤU CHẤM PHÂN CÁCH HÀNG NGHÌN -->
+              <input type="text" id="amount" value="0" oninput="formatCurrency(this)" placeholder="0" required>
               <div class="input-group-addon">VNĐ</div>
             </div>
           </div>
           <div class="form-group">
             <label for="category">Lớp / Danh mục chi</label>
-            <input type="text" id="category" placeholder="VD: IELTS K1, Chi tiền điện..." required>
+            <input type="text" id="category" placeholder="VD: IELTS K1, Chi tiền điện...">
           </div>
         </div>
 
         <div class="form-group">
           <label for="description">Nội dung / Diễn giải chi tiết</label>
-          <textarea id="description" placeholder="Mô tả tóm tắt các phát sinh giao dịch trong ngày..."></textarea>
+          <textarea id="description" placeholder="Mô tả tóm tắt các phát sinh giao dịch trong ngày (hoặc lý do không có GD)..."></textarea>
         </div>
 
         <hr style="border: 0; border-top: 1px dashed #dcdfe6; margin: 25px 0;">
@@ -166,6 +168,18 @@
       document.getElementById('reportDate').value = new Date().toLocaleDateString('en-CA');
     });
 
+    // 🌟 HÀM TỰ ĐỘNG CHÈN DẤU CHẤM PHÂN CÁCH HÀNG NGHÌN KHI GÕ
+    function formatCurrency(input) {
+      // Bỏ tất cả ký tự không phải số
+      let value = input.value.replace(/\D/g, "");
+      if (value === "") {
+        input.value = "0";
+        return;
+      }
+      // Định dạng số có dấu chấm phân cách hàng nghìn (VD: 10.860.000)
+      input.value = parseInt(value, 10).toLocaleString("vi-VN");
+    }
+
     function handleFormSubmit(event) {
       event.preventDefault();
       
@@ -173,18 +187,21 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = 'ĐANG GỬI DỮ LIỆU...';
 
+      // Bỏ toàn bộ dấu chấm để chuyển về số thuần trước khi gửi lên Apps Script
+      const rawAmount = document.getElementById('amount').value.replace(/\./g, "");
+
       const formData = {
         formType: "KE_TOAN",
         reportDate: document.getElementById('reportDate').value,
         txCount: document.getElementById('txCount').value + " giao dịch",
         txType: document.getElementById('txType').value,
-        description: document.getElementById('description').value,
-        amount: document.getElementById('amount').value,
+        description: document.getElementById('description').value || "Không có phát sinh",
+        amount: rawAmount,
         method: document.getElementById('method').value,
-        category: document.getElementById('category').value,
+        category: document.getElementById('category').value || "Chung",
         payrollStatus: document.getElementById('payrollStatus').value,
         feeReminderStatus: document.getElementById('feeReminderStatus').value,
-        proposals: document.getElementById('proposals').value
+        proposals: document.getElementById('proposals').value || "Không"
       };
 
       fetch(SCRIPT_URL, {
